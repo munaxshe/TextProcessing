@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TextProcessing
 {
     internal class Program
     {
+        // Main program: asks for a file, reads its contents, and counts unique word occurrences.
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter the full path of the text file: ");
+            Console.WriteLine("Please enter the path to the text file you want to process:");
             string filePath = Console.ReadLine();
 
             if (!File.Exists(filePath))
             {
-                Console.WriteLine("The file does not exist. Exiting...");
+                Console.WriteLine($"Sorry, the file \"{filePath}\" does not exist. Exiting program.");
                 return;
             }
 
@@ -45,8 +44,10 @@ namespace TextProcessing
                 }
             }
 
+            Console.WriteLine("\nProcessing complete!\n");
+
             // Output word counts
-            Console.WriteLine("\n Word occurrences:");
+            Console.WriteLine("Word occurrences:");
             foreach (var pair in wordCounts.OrderBy(p=>p.Key))
             {
                 Console.WriteLine($"{pair.Key}: {pair.Value}");
@@ -55,6 +56,5 @@ namespace TextProcessing
             Console.WriteLine($"\nTotal number of unique words: {wordCounts.Count}");
             Console.ReadKey();
         }
-       
     }
 }
